@@ -9,7 +9,13 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppFooter: typeof import('./components/AppFooter.vue')['default']
     AppNavigationDrawer: typeof import('./components/AppNavigationDrawer.vue')['default']
+    CarConfig: typeof import('./components/status/CarConfig.vue')['default']
+    CircuitInfo: typeof import('./components/CircuitInfo.vue')['default']
+    CurrentStatus: typeof import('./components/CurrentStatus.vue')['default']
+    DriverInfo: typeof import('./components/status/DriverInfo.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
+    Leaderboard: typeof import('./components/Leaderboard.vue')['default']
+    LiveStats: typeof import('./components/status/LiveStats.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
