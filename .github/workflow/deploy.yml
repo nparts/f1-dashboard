@@ -22,7 +22,8 @@ jobs:
           
       - name: Build Docker image
         run: docker build -t f1-dashboard .
-        
+      
+      # run container
       - name: Run Docker container
         run: |
           docker run -d \
