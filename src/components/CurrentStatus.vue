@@ -25,9 +25,6 @@
   
   <script setup lang="ts">
   import { computed } from 'vue'
-  import DriverInfo from './status/DriverInfo.vue'
-  import CarConfig from './status/CarConfig.vue'
-  import LiveStats from './status/LiveStats.vue'
   
   // Dummy data - will be replaced with Pinia store
   const currentDriver = {
@@ -52,15 +49,24 @@
     differential: 75,
     tires: 'Soft'
   }
-  
-  const liveStats = {
-    speed: 285,
-    gear: 6,
-    rpm: 11200,
-    drs: 'available',
-    throttle: 100,
-    brake: 0
+
+  interface LiveStats {
+    speed: number;
+    gear: number;
+    rpm: number;
+    drs: 'available' | 'active' | 'not_available';
+    throttle: number;
+    brake: number;
   }
+
+  const liveStats = ref<LiveStats>({
+    speed: 0,
+    gear: 0,
+    rpm: 0,
+    drs: 'not_available',
+    throttle: 0,
+    brake: 0
+  });
   
   const hasActiveDriver = computed(() => true) // Will be connected to store
   </script>

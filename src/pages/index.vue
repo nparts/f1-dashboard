@@ -1,25 +1,35 @@
 <template>
-      <v-container fluid class="pa-0 fill-height">
-        <v-row no-gutters class="fill-height">
-          <!-- Left Column (1/3) -->
-          <v-col cols="4" class="grey-lighten-4">
-            <div class="pa-4 fill-height d-flex flex-column">
-              <!-- Current Status Component -->
-              <CurrentStatus class="flex-grow-1"/>
-              <!-- Circuit Info Component -->
-              <CircuitInfo class="mt-4"/>
-            </div>
-          </v-col>
+  <v-container fluid>
+    <v-row>
+      <v-col cols="12">
+        <LiveTelemetry />
+      </v-col>
+    </v-row>
 
-          <!-- Right Column (2/3) -->
-          <v-col cols="8">
-            <div class="pa-4 fill-height">
-              <Leaderboard />
-            </div>
-          </v-col>
-        </v-row>
-      </v-container>
+    <v-row>
+      <v-col cols="12" md="6">
+        <LapTiming />
+      </v-col>
+      <v-col cols="12" md="6">
+        <CarSetupDisplay />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 <script lang="ts" setup>
-  //
+  import { onMounted, onUnmounted } from 'vue';
+  import { useTelemetryStore } from '@/stores/telemetry';
+  import LiveTelemetry from '@/components/LiveTelemetry.vue';
+  import LapTiming from '@/components/LapTiming.vue';
+  import CarSetupDisplay from '@/components/CarSetupDisplay.vue';
+
+  const store = useTelemetryStore();
+
+  onMounted(() => {
+    store.bindEvents();
+  });
+
+  onUnmounted(() => {
+    store.disconnect();
+  });
 </script>

@@ -73,9 +73,9 @@
         </div>
       </div>
     </div>
-</template>
+  </template>
   
-<script setup lang="ts">
+  <script setup lang="ts">
   interface LiveStatsProps {
     stats: {
       speed: number;

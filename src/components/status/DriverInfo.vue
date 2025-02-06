@@ -38,4 +38,3 @@
   
   defineProps<DriverProps>();
   </script>
-  
