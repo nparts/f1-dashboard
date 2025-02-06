@@ -1,0 +1,32 @@
+name: Deploy F1 Dashboard
+
+on:
+  push:
+    branches:
+      - main  # or your default branch
+  workflow_dispatch:  # allows manual trigger
+
+jobs:
+  deploy:
+    runs-on: self-hosted  # specify self-hosted runner
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Stop existing container
+        continue-on-error: true  # continue if container doesn't exist
+        run: |
+          docker stop f1-dashboard || true
+          docker rm f1-dashboard || true
+          
+      - name: Build Docker image
+        run: docker build -t f1-dashboard .
+        
+      - name: Run Docker container
+        run: |
+          docker run -d \
+            --name f1-dashboard \
+            -p 80:80 \
+            --restart unless-stopped \
+            f1-dashboard
