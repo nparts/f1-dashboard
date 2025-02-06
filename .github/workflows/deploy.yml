@@ -28,6 +28,6 @@ jobs:
         run: |
           docker run -d \
             --name f1-dashboard \
-            -p 80:80 \
+            -p 8080:80 \
             --restart unless-stopped \
             f1-dashboard
