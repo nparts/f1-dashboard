@@ -36,16 +36,12 @@ export const useTelemetryStore = defineStore("telemetry", {
 
       // Listen for lap data updates
       socket.on("lapData", (message) => {
-        if (message.type === 'PACKET_LAP_DATA') {
           this.lapData = message.data;
-        }
       });
 
       // Listen for car setup updates
       socket.on("carSetup", (message) => {
-        if (message.type === 'PACKET_CAR_SETUP') {
           this.carSetup = message.data;
-        }
       });
     },
 
