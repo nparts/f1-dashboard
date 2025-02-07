@@ -2,23 +2,23 @@
     <v-card>
       <v-card-title>Lap Timing</v-card-title>
       <v-card-text>
-        <template v-if="lapData">
+        <template v-if="currentLapData">
           <v-row>
             <!-- Current Lap -->
             <v-col cols="12" md="6">
               <v-card variant="outlined">
                 <v-card-text>
                   <div class="text-subtitle-2">Current Lap</div>
-                  <div class="text-h5">{{ lapData.m_currentLapNum }}</div>
+                  <div class="text-h5">{{ currentLapData.m_currentLapNum }}</div>
                   <div class="text-subtitle-1">
-                    {{ formatTime(lapData.m_currentLapTimeInMS) }}
+                    {{ formatTime(currentLapData.m_currentLapTimeInMS) }}
                   </div>
                   <v-chip
-                    :color="lapData.m_currentLapInvalid ? 'error' : 'success'"
+                    :color="currentLapData.m_currentLapInvalid ? 'error' : 'success'"
                     size="small"
                     class="mt-2"
                   >
-                    {{ lapData.m_currentLapInvalid ? 'Invalid' : 'Valid' }}
+                    {{ currentLapData.m_currentLapInvalid ? 'Invalid' : 'Valid' }}
                   </v-chip>
                 </v-card-text>
               </v-card>
@@ -30,7 +30,7 @@
                 <v-card-text>
                   <div class="text-subtitle-2">Last Lap</div>
                   <div class="text-h5">
-                    {{ formatTime(lapData.m_lastLapTimeInMS) }}
+                    {{ formatTime(currentLapData.m_lastLapTimeInMS) }}
                   </div>
                 </v-card-text>
               </v-card>
@@ -45,7 +45,7 @@
                 <v-col v-for="(sector, index) in sectors" :key="index" cols="4">
                   <v-card
                     variant="outlined"
-                    :color="lapData.m_sector === index ? 'primary' : undefined"
+                    :color="currentLapData.m_sector === index ? 'primary' : undefined"
                   >
                     <v-card-text class="text-center">
                       <div class="text-subtitle-2">S{{ index + 1 }}</div>
@@ -81,6 +81,8 @@
   
   const sectors = [0, 1, 2];
   
+  const currentLapData = computed(() => lapData.value?.m_lapData[0] ?? null);
+  
   function formatTime(ms: number): string {
     if (!ms) return '--:--:---';
     const minutes = Math.floor(ms / 60000);
@@ -90,17 +92,17 @@
   }
   
   function getSectorTime(sector: number): number {
-    if (!lapData.value) return 0;
+    if (!currentLapData.value) return 0;
     switch (sector) {
       case 0:
-        return lapData.value.m_sector1TimeInMS;
+        return currentLapData.value.m_sector1TimeInMS;
       case 1:
-        return lapData.value.m_sector2TimeInMS;
+        return currentLapData.value.m_sector2TimeInMS;
       case 2:
-        const total = lapData.value.m_currentLapTimeInMS;
-        const s1 = lapData.value.m_sector1TimeInMS;
-        const s2 = lapData.value.m_sector2TimeInMS;
-        return lapData.value.m_sector === 2 ? total - s1 - s2 : 0;
+        const total = currentLapData.value.m_currentLapTimeInMS;
+        const s1 = currentLapData.value.m_sector1TimeInMS;
+        const s2 = currentLapData.value.m_sector2TimeInMS;
+        return currentLapData.value.m_sector === 2 ? total - s1 - s2 : 0;
       default:
         return 0;
     }

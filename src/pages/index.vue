@@ -19,9 +19,6 @@
 <script lang="ts" setup>
   import { onMounted, onUnmounted } from 'vue';
   import { useTelemetryStore } from '@/stores/telemetry';
-  import LiveTelemetry from '@/components/LiveTelemetry.vue';
-  import LapTiming from '@/components/LapTiming.vue';
-  import CarSetupDisplay from '@/components/CarSetupDisplay.vue';
 
   const store = useTelemetryStore();
 

@@ -114,20 +114,20 @@
       <v-col cols="12" md="4">
         <v-card>
           <v-card-title>Lap Information</v-card-title>
-          <v-card-text v-if="lapData">
-            <div class="text-h6 mb-2">Lap {{ lapData.m_currentLapNum }}</div>
+          <v-card-text v-if="lap">
+            <div class="text-h6 mb-2">Lap {{ lap.m_currentLapNum }}</div>
             <v-chip
-              :color="lapData.m_currentLapInvalid === 0 ? 'success' : 'error'"
+              :color="lap.m_currentLapInvalid === 0 ? 'success' : 'error'"
               class="mb-4"
             >
-              {{ lapData.m_currentLapInvalid === 0 ? 'Valid' : 'Invalid' }}
+              {{ lap.m_currentLapInvalid === 0 ? 'Valid' : 'Invalid' }}
             </v-chip>
 
             <div class="text-subtitle-1 mt-4">Current Time</div>
-            <div class="text-h5 mb-4">{{ formatTime(lapData.m_currentLapTimeInMS) }}</div>
+            <div class="text-h5 mb-4">{{ formatTime(lap.m_currentLapTimeInMS) }}</div>
 
             <div class="text-subtitle-1">Last Lap</div>
-            <div class="text-h5">{{ formatTime(lapData.m_lastLapTimeInMS) }}</div>
+            <div class="text-h5">{{ formatTime(lap.m_lastLapTimeInMS) }}</div>
           </v-card-text>
           <v-card-text v-else>
             <v-alert
@@ -146,9 +146,15 @@
 <script setup lang="ts">
 import { useTelemetryStore } from '@/stores/telemetry';
 import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
 
 const store = useTelemetryStore();
-const { telemetry, lapData, isConnected } = storeToRefs(store);
+const { carTelemetry, lapData, isConnected } = storeToRefs(store);
+
+// Computed property to get the first car's telemetry data
+const telemetry = computed(() => carTelemetry.value?.m_carTelemetryData[0] ?? null);
+
+const lap = computed(() => lapData.value?.m_lapData[0] ?? null);
 
 function formatGear(gear: number): string {
   if (gear === -1) return 'R';

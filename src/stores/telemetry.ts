@@ -1,21 +1,42 @@
-// src/stores/telemetry.ts
 import { defineStore } from "pinia";
 import { socket } from "@/services/socket";
-import type { TelemetryData, LapData, CarSetupData } from '@/types/telemetry';
+import type { PacketCarDamageData, PacketCarSetupData, PacketCarStatusData, PacketCarTelemetryData, PacketEventData, PacketFinalClassificationData, PacketLapData, PacketLobbyInfoData, PacketMotionData, PacketMotionExData, PacketParticipantsData, PacketSessionData, PacketSessionHistoryData, PacketTyreSetsData } from '@/types/telemetry';
 
 interface TelemetryState {
-  telemetry: TelemetryData | null;
-  lapData: LapData | null;
-  carSetup: CarSetupData | null;
+  event: PacketEventData | null,
+  motion: PacketMotionData | null,
+  session: PacketSessionData | null,
+  lapData: PacketLapData | null,
+  participants: PacketParticipantsData | null,
+  carSetups: PacketCarSetupData | null,
+  carTelemetry: PacketCarTelemetryData | null,
+  carStatus: PacketCarStatusData | null,
+  finalClassification: PacketFinalClassificationData | null,
+  lobbyInfo: PacketLobbyInfoData | null,
+  carDamage: PacketCarDamageData | null,
+  sessionHistory: PacketSessionHistoryData | null,
+  tyreSets: PacketTyreSetsData | null,
+  motionEx: PacketMotionExData | null,
   isConnected: boolean;
 }
 
 export const useTelemetryStore = defineStore("telemetry", {
   state: (): TelemetryState => ({
-    telemetry: null,
+    event: null,
+    motion: null,
+    session: null,
     lapData: null,
-    carSetup: null,
-    isConnected: false
+    participants: null,
+    carSetups: null,
+    carTelemetry: null,
+    carStatus: null,
+    finalClassification: null,
+    lobbyInfo: null,
+    carDamage: null,
+    sessionHistory: null,
+    tyreSets: null,
+    motionEx: null,
+    isConnected: false,
   }),
 
   actions: {
@@ -24,24 +45,50 @@ export const useTelemetryStore = defineStore("telemetry", {
       socket.on("connect", () => {
         this.isConnected = true;
       });
-
       socket.on("disconnect", () => {
         this.isConnected = false;
       });
-
-      // Listen for car telemetry updates
-      socket.on("carTelemetry", (message) => {
-          this.telemetry = message.m_carTelemetryData?.[0];
+      socket.on("event", (data) => {
+          this.event = data;
       });
-
-      // Listen for lap data updates
-      socket.on("lapData", (message) => {
-          this.lapData = message.data;
+      socket.on("motion", (data) => {
+          this.motion = data;
       });
-
-      // Listen for car setup updates
-      socket.on("carSetup", (message) => {
-          this.carSetup = message.data;
+      socket.on("session", (data) => {
+          this.session = data;
+      });
+      socket.on("lapData", (data) => {
+          this.lapData = data;
+      });
+      socket.on("participants", (data) => {
+          this.participants = data;
+      });
+      socket.on("carSetups", (data) => {
+          this.carSetups = data;
+      });
+      socket.on("carTelemetry", (data) => {
+          this.carTelemetry = data;
+      });
+      socket.on("carStatus", (data) => {
+          this.carStatus = data;
+      });
+      socket.on("finalClassification", (data) => {
+          this.finalClassification = data;
+      });
+      socket.on("lobbyInfo", (data) => {
+          this.lobbyInfo = data;
+      });
+      socket.on("carDamage", (data) => {
+          this.carDamage = data;
+      });
+      socket.on("sessionHistory", (data) => {
+          this.sessionHistory = data;
+      });
+      socket.on("tyreSets", (data) => {
+          this.tyreSets = data;
+      });
+      socket.on("motionEx", (data) => {
+          this.motionEx = data;
       });
     },
 
