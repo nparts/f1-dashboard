@@ -102,11 +102,5 @@ export const useTelemetryStore = defineStore("telemetry", {
   },
 
   getters: {
-    isDriverActive: (state) => state.telemetry !== null,
-    currentSpeed: (state) => state.telemetry?.m_speed ?? 0,
-    currentLap: (state) => state.lapData?.m_currentLapNum ?? 0,
-    lastLapTime: (state) => state.lapData?.m_lastLapTimeInMS ?? 0,
-    currentLapTime: (state) => state.lapData?.m_currentLapTimeInMS ?? 0,
-    isLapValid: (state) => state.lapData?.m_currentLapInvalid === 0
   }
 });
