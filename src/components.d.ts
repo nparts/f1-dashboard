@@ -9,11 +9,8 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppFooter: typeof import('./components/AppFooter.vue')['default']
     AppNavigationDrawer: typeof import('./components/AppNavigationDrawer.vue')['default']
-    CarConfig: typeof import('./components/status/CarConfig.vue')['default']
     CarSetupDisplay: typeof import('./components/CarSetupDisplay.vue')['default']
-    DriverInfo: typeof import('./components/status/DriverInfo.vue')['default']
     LapTiming: typeof import('./components/LapTiming.vue')['default']
-    LiveStats: typeof import('./components/status/LiveStats.vue')['default']
     LiveTelemetry: typeof import('./components/LiveTelemetry.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
