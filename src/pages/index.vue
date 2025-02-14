@@ -1,17 +1,14 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="12">
+      <v-col cols="4">
+        <LapTime />
+      </v-col>
+      <v-col cols="4">
         <LiveTelemetry />
       </v-col>
-    </v-row>
-
-    <v-row>
-      <v-col cols="12" md="6">
-        <LapTiming />
-      </v-col>
-      <v-col cols="12" md="6">
-        <CarSetupDisplay />
+      <v-col cols="4">
+        <Leaderboard />
       </v-col>
     </v-row>
   </v-container>

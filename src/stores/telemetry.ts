@@ -82,7 +82,9 @@ export const useTelemetryStore = defineStore("telemetry", {
           this.carDamage = data;
       });
       socket.on("sessionHistory", (data) => {
+        if(data.m_carIdx == data.m_header.player_car_index ) {
           this.sessionHistory = data;
+        }
       });
       socket.on("tyreSets", (data) => {
           this.tyreSets = data;
