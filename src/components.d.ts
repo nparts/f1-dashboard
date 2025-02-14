@@ -10,6 +10,7 @@ declare module 'vue' {
     AppFooter: typeof import('./components/AppFooter.vue')['default']
     AppNavigationDrawer: typeof import('./components/AppNavigationDrawer.vue')['default']
     CarSetupDisplay: typeof import('./components/CarSetupDisplay.vue')['default']
+    LapHistory: typeof import('./components/LapHistory.vue')['default']
     LapTime: typeof import('./components/LapTime.vue')['default']
     Leaderboard: typeof import('./components/Leaderboard.vue')['default']
     LiveTelemetry: typeof import('./components/LiveTelemetry.vue')['default']

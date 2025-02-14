@@ -3,6 +3,7 @@
     <v-row>
       <v-col cols="4">
         <LapTime />
+        <LapHistory />
       </v-col>
       <v-col cols="4">
         <LiveTelemetry />
