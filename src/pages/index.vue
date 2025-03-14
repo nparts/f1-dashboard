@@ -8,9 +8,6 @@
       <v-col cols="4">
         <LiveTelemetry />
       </v-col>
-      <v-col cols="4">
-        <Leaderboard />
-      </v-col>
     </v-row>
   </v-container>
 </template>
